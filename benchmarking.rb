@@ -16,6 +16,7 @@ Benchmark.bm do |x|
   x.report { r.reconcile_helper_1(array_1, array_2) }
   x.report { r.reconcile_helper_2(array_1, array_2) }
   x.report { r.reconcile_helper_3(array_1, array_2) }
+  x.report { r.reconcile_helper_4(array_1, array_2) }
 end
 
 n = 20
@@ -30,4 +31,5 @@ end
 puts r.reconcile_helper_1(array_1, array_2)
 puts r.reconcile_helper_2(array_1, array_2)
 puts r.reconcile_helper_3(array_1, array_2)
+puts r.reconcile_helper_4(array_1, array_2)
 
