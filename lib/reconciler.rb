@@ -26,7 +26,54 @@ class Reconciler
     print_results(unique_in_first, unique_in_second)
   end
 
+  def find_unique(arr1, arr2)
+    unique_members = []
+
+    arr1.each do |num1|
+      unique = true
+
+      arr2.each do |num2|
+        break unique = false if num1 == num2
+      end
+
+      unique_members << num1 if unique
+    end
+
+    unique_members
+  end
+
+  def print_results(unique_in_first, unique_in_second)
+    "Numbers in array 1 that aren't in array 2:\n#{unique_in_first}\n" + "Numbers in array 2 that aren't in array 1:\n#{unique_in_second}"
+  end
+
   def reconcile_helper_4(array_1, array_2)
+    nums_1, nums_2 = reconciler_old(array_1, array_2)
+    "Numbers in array 1 that aren't in array 2:\n#{nums_1.join(" ")}\n\nNumbers in array 2 that aren't in array 1:\n#{nums_2.join(" ")}\n"
+  end
+
+  def reconciler_old(array_1, array_2)
+    nums_1 = array_subtraction(array_1, array_2)
+    nums_2 = array_subtraction(array_2, array_1)
+
+    [nums_1, nums_2]
+  end
+
+  def array_subtraction(array_1, array_2)
+    nums_1 = []
+
+    array_1.each do |number_1|
+      in_2   = false
+      array_2.each do |number_2|
+        if number_1 == number_2
+          in_2 = true
+        end
+      end
+
+      if in_2 == false
+        nums_1 << number_1
+      end
+    end
+    nums_1
   end
 
   private
@@ -68,25 +115,5 @@ class Reconciler
       end
     end
     in_1
-  end
-
-  def find_unique(arr1, arr2)
-    unique_members = []
-
-    arr1.each do |num1|
-      unique = true
-
-      arr2.each do |num2|
-        break unique = false if num1 == num2
-      end
-
-      unique_members << num1 if unique
-    end
-
-    unique_members
-  end
-
-  def print_results(unique_in_first, unique_in_second)
-    "Numbers in array 1 that aren't in array 2:\n#{unique_in_first}\n" + "Numbers in array 2 that aren't in array 1:\n#{unique_in_second}"
   end
 end
